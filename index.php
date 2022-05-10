@@ -16,6 +16,7 @@
     $query->execute();
     $arrays = $query->fetchALL(PDO::FETCH_ASSOC);
     
+    
         ?>
     <header>
         <div class="header_top">

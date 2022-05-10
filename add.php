@@ -1,7 +1,7 @@
 <?php 
 $data = [
-    'title'=$_POST['title'],
-    'content' = $_POST['content']
+    'title' => $_POST['title'],
+    'content' => $_POST['content']
 ];
 $pdo = new PDO('mysql:host=localhost;dbname=newss','root','');
 $sql = 'INSERT INTO `tanki`(`title`, `content`) VALUES (:title,:content)';
