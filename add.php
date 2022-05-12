@@ -3,11 +3,8 @@ $data = [
     'title' => $_POST['title'],
     'content' => $_POST['content']
 ];
-$pdo = new PDO('mysql:host=localhost;dbname=newss','root','');
-$sql = 'INSERT INTO `tanki`(`title`, `content`) VALUES (:title,:content)';
-$query = $pdo->prepare($sql);
-$query->execute($data);
-$array = $query->fetch(PDO::FETCH_ASSOC);
+require_once './functions.php';
+add($data);
 header('Location:./index.php');
 
 ?>

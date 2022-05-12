@@ -4,12 +4,8 @@ $data = [
     'content' => $_POST['content'],
     'id' => $_GET['id'],
 ];
-
-$pdo = new PDO('mysql:host=localhost;dbname=newss','root','');
-$sql = "UPDATE `tanki` SET title=:title , content = :content WHERE id=:id";
-$query = $pdo->prepare($sql);
-$query->execute($data);
-$arrays = $query->fetch(PDO::FETCH_ASSOC);
+require_once './functions.php';
+update($data);
 
     header('Location: ./index.php');
 ?>

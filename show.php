@@ -11,12 +11,8 @@
 <body>
     
 <?php 
-$pdo = new PDO('mysql:host=localhost;dbname=newss','root','');
-$sql = 'SELECT * FROM tanki WHERE id=:id';
-$query = $pdo->prepare($sql);
-$query->bindParam(':id',$_GET['id']);
-$query->execute();
-$array = $query->fetch(PDO::FETCH_ASSOC);
+    require_once 'functions.php';
+    $array = select();
 
  ?>
     <section>

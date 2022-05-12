@@ -1,10 +1,6 @@
 <?php 
-    $pdo = new PDO('mysql:host=localhost;dbname=newss','root','');
-    $sql = 'SELECT * FROM tanki WHERE id=:id';
-    $query = $pdo->prepare($sql);
-    $query->bindParam(':id',$_GET['id']);
-    $query->execute();
-    $arrays = $query->fetch(PDO::FETCH_ASSOC);
+    require_once './functions.php';
+    $array = select();
     
     
     ?>
@@ -25,13 +21,13 @@
     <div class="row">
         <div class="col-md-12">
             <h1>РЕДАКТИРОВАТЬ БЛОК</h1>
-            <form action="./update.php?id=<?= $arrays['id']?>" method="post">
+            <form action="./update.php?id=<?= $array['id']?>" method="post">
                 <div class="form-group">
-                    <input type="text" name="title" class="form-control" value="<?= $arrays['title']?>">
+                    <input type="text" name="title" class="form-control" value="<?= $array['title']?>">
                 </div>
 
                 <div class="form-group">
-                    <textarea name="content" class="form-control"><?= $arrays['content'] ?></textarea>
+                    <textarea name="content" class="form-control"><?= $array['content'] ?></textarea>
                 </div>
 
                 <div class="form-group">

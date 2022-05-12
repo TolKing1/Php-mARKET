@@ -10,13 +10,17 @@
 </head>
 <body>
     <?php 
-    $pdo = new PDO('mysql:host=localhost;dbname=newss','root','');
-    $sql = 'SELECT * FROM tanki';
-    $query = $pdo->prepare($sql);
-    $query->execute();
-    $arrays = $query->fetchALL(PDO::FETCH_ASSOC);
-    
-    
+    session_start();
+    require_once './functions.php';
+    $arrays = getAll();
+
+    if(isset($_POST)){
+        $name = $_POST['name'];
+        $password = hash('md5',$_POST['password']);
+        login($name,$password);
+    }
+    echo "<pre>"; print_r($_SESSION['logged']);echo "</pre>";
+    session_destroy();
         ?>
     <header>
         <div class="header_top">
@@ -44,9 +48,12 @@
                                     </form>
                                 </div>
                             </div>
+                            
                             <a href="./registr.php" class="btn btn-success ml-4">Зарегистрироватся</a>
-                            <span  class="nav_hello">Привет : </span>
-                            <a href="#" class="btn btn-secondary ml-4">Выйти</a>
+                            <?php if(isset($_SESSION['logged'])): ?>
+                            <span  class="nav_hello">Привет :<?= $_SESSION['logged']['name'] ?> </span>
+                            <a href="./logout.php"  class="btn btn-secondary ml-4">Выйти</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -60,7 +67,9 @@
                 <div class="col-12">
                     <div class="news">
                         <h2>НОВОСТИ И ТОВОРАЫ : </h2>
+                        <?php if(isset($_SESSION['logged'])): ?>
                         <a href="./create.php" class="btn btn-success ">ДОБАВИТЬ</a>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="col-12">
@@ -76,9 +85,12 @@
                         <li><?= $array['id'] ?></li>
                         <li><?= $array['title'] ?></li>
                         <li>
+                            
                             <a href="./show.php?id=<?= $array['id'] ?>" class="btn btn btn-warning">Показать</a>
+                            <?php if(isset($_SESSION['logged'])): ?>
                             <a href="./edit.php?id=<?= $array['id'] ?>" class="btn btn btn-secondary">Редактировать</a>
                             <a href="./delete.php?id=<?= $array['id'] ?>" class="btn btn btn-danger">Удалить</a>
+                            <?php endif; ?>
                         </li>
                     </ul>
                     <?php endforeach ?>

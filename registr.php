@@ -13,7 +13,7 @@
 		<div class="row justify-content-center">
 			<div class="col-5">
 				<h2 class="my-4">Регистрация</h2>
-				<form action="" method="post">
+				<form action="./registr-code.php" method="post">
                     <div class="form-group my-3">
                         <input type="name" class="form-control" placeholder="Name" name="name">
                     </div>
